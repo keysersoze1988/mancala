@@ -1,0 +1,159 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Mancala API",
+      "description": "Mancala API",
+      "license": {
+        "name": "LIC",
+        "url": "https://opensource.org/licenses/LIC"
+      }
+    },
+    "host": "localhost:4040",
+    "basePath": "/api/",
+    "tags": [
+      {
+        "name": "Game",
+        "description": "API for game"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "securityDefinitions": {
+      "AuthHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    },
+    "paths": {
+      "/game": {
+        "post": {
+          "tags": ["Game"],
+          "description": "Create New Game",
+        "parameters": [{
+          "name": "game",
+          "in": "body",
+          "description": "game details",
+          "schema": {
+            "type": "object",
+            "required": ["NamePlayerOne", "NamePlayerTwo"],
+            "properties": {
+              "NamePlayerOne": {
+                "type": "string"
+              },
+              "NamePlayerTwo": {
+                "type": "string"
+              }
+            }
+          }
+        }],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "game created",
+            "schema": {
+              "$ref": "#/definitions/Game"
+            }
+          }
+        }
+      }
+      },
+      "/game/move": {
+        "post": {
+          "tags": ["Move"],
+          "description": "Make a move for a player",
+        "parameters": [{
+          "name": "game",
+          "in": "body",
+          "description": "game details",
+          "schema": {
+            "type": "object",
+            "required": ["gameId", "playerNumber","pitNumber"],
+            "properties": {
+              "gameId": {
+                "type": "string"
+              },
+              "playerNumber": {
+                "type": "number"
+              },
+              "pitNumber": {
+                "type": "number"
+              }
+            }
+          }
+        }],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "succesful move",
+            "schema": {
+              "$ref": "#/definitions/Move"
+            }
+          }
+        }
+      }
+      }
+    },
+    "definitions": {
+      "Game": {
+        "required": [
+          "NamePlayerOne",
+          "NamePlayerTwo"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "fullname": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Move": {
+        "required": [
+          "NamePlayerOne",
+          "NamePlayerTwo"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "fullname": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+  }
+}
