@@ -1,4 +1,4 @@
-# meanStack
+# Mancala Node JS implementation
 
 install
 
